@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Xodimlar</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .staff-table {
+      width: 100%;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .staff-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .staff-table thead {
+      background: var(--gray-50);
+    }
+    
+    .staff-table th {
+      padding: 16px;
+      text-align: left;
+      font-weight: var(--weight-semibold);
+      color: var(--gray-600);
+      font-size: var(--font-size-sm);
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    
+    .staff-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .staff-table tbody tr:hover {
+      background: var(--gray-50);
+    }
+    
+    .staff-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .staff-name {
+      font-weight: var(--weight-semibold);
+      color: var(--gray-900);
+    }
+    
+    .staff-position {
+      color: var(--gray-600);
+      font-size: var(--font-size-sm);
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: var(--font-size-xs);
+      font-weight: var(--weight-medium);
+    }
+    
+    .status-active {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    
+    .status-inactive {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="ideal-mahalla.html" class="nav-item">
+          <i class="fas fa-star"></i>
+          <span>Ideal mahalla</span>
+        </a>
+        <a href="murojaatlar.html" class="nav-item">
+          <i class="fas fa-comments"></i>
+          <span>Murojaatlar</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item active">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <h1 class="page-title">Xodimlar</h1>
+        <p style="margin-bottom: 24px; color: var(--gray-600);">Tizim xodimlari ro'yxati</p>
+        
+        <div class="staff-table">
+          <table>
+            <thead>
+              <tr>
+                <th>F.I.Sh</th>
+                <th>Lavozim</th>
+                <th>Telefon</th>
+                <th>Email</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="staffTableBody">
+              <!-- Staff will be generated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    // Initialize authentication and update user menu
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initAuth === 'function') {
+        initAuth();
+      }
+    });
+  </script>
+  <script>
+    // Staff data
+    const staff = [
+      { id: 1, name: 'Ravshan', surname: 'Toshmatov', position: 'Direktor', phone: '+998901234567', email: 'akmal.toshmatov@adliya.uz', status: 'active', color: 1 },
+      { id: 2, name: 'Abdulloh', surname: 'Abdurashidov', position: 'Bosh mutaxassis', phone: '+998901234568', email: 'dilshod.karimov@adliya.uz', status: 'active', color: 2 },
+      { id: 3, name: 'Nigora', surname: 'Rahmonova', position: 'Mutaxassis', phone: '+998901234569', email: 'nigora.rahmonova@adliya.uz', status: 'active', color: 3 },
+      { id: 4, name: 'Azizbek', surname: 'Alimov', position: 'Statistik', phone: '+998901234570', email: 'azizbek.alimov@adliya.uz', status: 'active', color: 4 },
+      { id: 5, name: 'Malika', surname: 'Usmonova', position: 'Mutaxassis', phone: '+998901234571', email: 'malika.usmonova@adliya.uz', status: 'active', color: 5 },
+      { id: 6, name: 'Rustam', surname: 'Valiyev', position: 'Dasturchi', phone: '+998901234572', email: 'rustam.valiyev@adliya.uz', status: 'active', color: 6 },
+      { id: 7, name: 'Gulnoza', surname: 'Olimova', position: 'Mutaxassis', phone: '+998901234573', email: 'gulnoza.olimova@adliya.uz', status: 'active', color: 7 },
+      { id: 8, name: 'Bahodir', surname: 'Nazarov', position: 'Analitik', phone: '+998901234574', email: 'bahodir.nazarov@adliya.uz', status: 'active', color: 8 },
+      { id: 9, name: 'Sardor', surname: 'Murodov', position: 'Mutaxassis', phone: '+998901234575', email: 'sardor.murodov@adliya.uz', status: 'active', color: 1 },
+      { id: 10, name: 'Madina', surname: 'Sobirova', position: 'Statistik', phone: '+998901234576', email: 'madina.sobirova@adliya.uz', status: 'active', color: 2 },
+      { id: 11, name: 'Temur', surname: 'Fayziyev', position: 'Mutaxassis', phone: '+998901234577', email: 'temur.fayziyev@adliya.uz', status: 'inactive', color: 3 },
+      { id: 12, name: 'Olim', surname: 'Toshmatov', position: 'Dasturchi', phone: '+998901234578', email: 'olim.toshmatov@adliya.uz', status: 'active', color: 4 },
+      { id: 13, name: 'Zarina', surname: 'Karimova', position: 'Mutaxassis', phone: '+998901234579', email: 'zarina.karimova@adliya.uz', status: 'active', color: 5 },
+      { id: 14, name: 'Bobur', surname: 'Rahmonov', position: 'Analitik', phone: '+998901234580', email: 'bobur.rahmonov@adliya.uz', status: 'inactive', color: 6 },
+      { id: 15, name: 'Sevara', surname: 'Alimova', position: 'Mutaxassis', phone: '+998901234581', email: 'sevara.alimova@adliya.uz', status: 'active', color: 7 },
+    ];
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const tableBody = document.getElementById('staffTableBody');
+      
+      // Generate staff rows
+      staff.forEach(person => {
+        const row = document.createElement('tr');
+        const initial = person.surname.charAt(0).toUpperCase();
+        const statusClass = person.status === 'active' ? 'status-active' : 'status-inactive';
+        const statusText = person.status === 'active' ? 'Faol' : 'Nofaol';
+        
+        row.innerHTML = `
+          <td>
+            <div class="staff-info">
+              <div class="avatar-placeholder small color-${person.color}">${initial}</div>
+              <div>
+                <div class="staff-name">${person.surname} ${person.name}</div>
+              </div>
+            </div>
+          </td>
+          <td>${person.position}</td>
+          <td>${person.phone}</td>
+          <td>${person.email}</td>
+          <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+        `;
+        tableBody.appendChild(row);
+      });
+      
+      // Search functionality
+      const searchInput = document.getElementById('globalSearch');
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const searchTerm = e.target.value.toLowerCase();
+          const tableRows = document.querySelectorAll('tbody tr');
+          
+          tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

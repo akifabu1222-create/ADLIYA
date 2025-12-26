@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Murojaatlar</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Chart.js - FIRST! -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="ideal-mahalla.html" class="nav-item">
+          <i class="fas fa-star"></i>
+          <span>Ideal mahalla</span>
+        </a>
+        <a href="murojaatlar.html" class="nav-item active">
+          <i class="fas fa-comments"></i>
+          <span>Murojaatlar</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <div class="filters">
+          <div class="filter-item">
+            <label>Yil:</label>
+            <select>
+              <option>2024</option>
+              <option>2023</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label>Viloyat:</label>
+            <select>
+              <option>Sirdaryo viloyati</option>
+              <option>Toshkent viloyati</option>
+            </select>
+          </div>
+        </div>
+        
+        <h1 class="page-title">MUROJAATLAR BO'LIMI</h1>
+        <p style="margin-bottom: 24px; color: var(--gray-600);">SIRDARYO TUMAN KESIMIDA</p>
+        
+        <div class="murojaat-grid">
+          <!-- Row 1 -->
+          <div class="murojaat-card green">
+            <div class="murojaat-card-title">SIRDARYO TUMANI</div>
+            <div class="murojaat-card-number">120k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart1" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <div class="murojaat-card yellow">
+            <div class="murojaat-card-title">XOVOS TUMANI</div>
+            <div class="murojaat-card-number">102k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart2" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <div class="murojaat-card red">
+            <div class="murojaat-card-title">SAYHUNOBOD TUMANI</div>
+            <div class="murojaat-card-number">94k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart3" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <!-- Row 2 -->
+          <div class="murojaat-card green">
+            <div class="murojaat-card-title">GULISTON SHAXAR</div>
+            <div class="murojaat-card-number">87k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart4" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <div class="murojaat-card yellow">
+            <div class="murojaat-card-title">SHIRIN SHAXAR</div>
+            <div class="murojaat-card-number">91k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart5" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <div class="murojaat-card red">
+            <div class="murojaat-card-title">MIRZAOBOD TUMANI</div>
+            <div class="murojaat-card-number">110k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart6" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <!-- Row 3 -->
+          <div class="murojaat-card yellow">
+            <div class="murojaat-card-title">YANGIYER SHAXAR</div>
+            <div class="murojaat-card-number">98k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart7" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <div class="murojaat-card red">
+            <div class="murojaat-card-title">SARDOBA TUMANI</div>
+            <div class="murojaat-card-number">108k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart8" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <div class="murojaat-card yellow">
+            <div class="murojaat-card-title">OQOLTIN TUMANI</div>
+            <div class="murojaat-card-number">130k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart9" class="murojaat-mini-chart"></canvas>
+          </div>
+          
+          <!-- Row 4 - Single card -->
+          <div class="murojaat-card green">
+            <div class="murojaat-card-title">GULISTON TUMANI</div>
+            <div class="murojaat-card-number">104k</div>
+            <div class="murojaat-card-label">nafar</div>
+            <canvas id="chart10" class="murojaat-mini-chart"></canvas>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    // Initialize authentication and update user menu
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initAuth === 'function') {
+        initAuth();
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function initCharts() {
+        if (typeof Chart === 'undefined') {
+          setTimeout(initCharts, 100);
+          return;
+        }
+        
+        // Colors for 10 cards: Green, Yellow, Red pattern
+        const colors = [
+          '#10B981',  // 1 - Sirdaryo - Green
+          '#FBBF24',  // 2 - Xovos - Yellow
+          '#EF4444',  // 3 - Sayhunobod - Red
+          '#10B981',  // 4 - Guliston shaxar - Green
+          '#FBBF24',  // 5 - Shirin - Yellow
+          '#EF4444',  // 6 - Mirzaobod - Red
+          '#FBBF24',  // 7 - Yangiyer - Yellow
+          '#EF4444',  // 8 - Sardoba - Red
+          '#FBBF24',  // 9 - Oqoltin - Yellow
+          '#10B981'   // 10 - Guliston tumani - Green
+        ];
+        
+        // Create all 10 mini charts
+        for (let i = 1; i <= 10; i++) {
+          createMiniChart('chart' + i, colors[i - 1]);
+        }
+      }
+      
+      initCharts();
+    });
+  </script>
+</body>
+</html>

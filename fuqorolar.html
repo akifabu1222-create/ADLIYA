@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Fuqorolar</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="ideal-mahalla.html" class="nav-item">
+          <i class="fas fa-star"></i>
+          <span>Ideal mahalla</span>
+        </a>
+        <a href="murojaatlar.html" class="nav-item">
+          <i class="fas fa-comments"></i>
+          <span>Murojaatlar</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item active">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <div class="grid-view-header">
+          <h1 class="page-title" style="margin: 0;">Fuqorolar</h1>
+          <div class="view-options">
+            <button class="view-btn active">
+              <i class="fas fa-th"></i>
+            </button>
+            <button class="view-btn">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="content-layout">
+          <!-- User Grid -->
+          <div class="user-grid" id="userGrid">
+            <!-- User cards will be generated here -->
+          </div>
+          
+          <!-- Filter Panel -->
+          <aside class="filter-panel">
+            <h3>Filtrlash bo'limi</h3>
+            <form class="filter-form" id="filterForm">
+              <div class="input-group">
+                <label class="input-label">Fuqoro F.I.O</label>
+                <input type="text" class="input" placeholder="familiya ism" id="nameInput">
+              </div>
+              
+              <div class="input-group">
+                <label class="input-label">Mahalla</label>
+                <select id="mahallaSelect">
+                  <option value="">Muxumidan tanlang</option>
+                  <option>Paxtakor</option>
+                  <option>Baxor</option>
+                  <option>Shirin</option>
+                  <option>Navruz</option>
+                  <option>Yoshlik</option>
+                </select>
+              </div>
+              
+              <div class="input-group">
+                <label class="input-label">Tug'ilgan sana</label>
+                <input type="date" class="input" id="birthdateInput">
+              </div>
+              
+              <div class="input-group">
+                <label class="input-label">Pasport seriyasi</label>
+                <input type="text" class="input" placeholder="AA 1234567" id="passportInput">
+              </div>
+              
+              <div class="input-group">
+                <label class="input-label">JSHSHIR raqami</label>
+                <input type="text" class="input" placeholder="12345678912345466" id="jshshirInput">
+              </div>
+              
+              <button type="submit" class="filter-btn">Qidirish</button>
+            </form>
+          </aside>
+        </div>
+        
+        <div class="pagination">
+          <span class="pagination-info" id="paginationInfo">1-16 of 156</span>
+          <div class="pagination-buttons" id="paginationButtons">
+            <button class="page-btn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/pagination.js"></script>
+  <script>
+    // Initialize authentication and update user menu
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initAuth === 'function') {
+        initAuth();
+      }
+    });
+  </script>
+  <script>
+    // User data with unique IDs (expanded list)
+    const users = [
+      { id: 1, name: 'Muhammad', surname: 'Usmonboyev', color: 1 },
+      { id: 2, name: 'Anvar', surname: 'Karimov', color: 2 },
+      { id: 3, name: 'Nigora', surname: 'Toshmatov', color: 3 },
+      { id: 4, name: 'Azizbek', surname: 'Rahmonov', color: 4 },
+      { id: 5, name: 'Shahriyor', surname: 'Isomiddinov', color: 5 },
+      { id: 6, name: 'Dilshod', surname: 'Alimov', color: 6 },
+      { id: 7, name: 'Farida', surname: 'Xasanov', color: 7 },
+      { id: 8, name: 'Javohir', surname: 'Yuldashev', color: 8 },
+      { id: 9, name: 'Malika', surname: 'Nazarov', color: 1 },
+      { id: 10, name: 'Rustam', surname: 'Salimov', color: 2 },
+      { id: 11, name: 'Gulnoza', surname: 'Olimov', color: 3 },
+      { id: 12, name: 'Bahodir', surname: 'Valiyev', color: 4 },
+      { id: 13, name: 'Dilbar', surname: 'Ganiyev', color: 5 },
+      { id: 14, name: 'Sardor', surname: 'Murodov', color: 6 },
+      { id: 15, name: 'Madina', surname: 'Sobirov', color: 7 },
+      { id: 16, name: 'Temur', surname: 'Fayziyev', color: 8 },
+      { id: 17, name: 'Olim', surname: 'Toshmatov', color: 1 },
+      { id: 18, name: 'Zarina', surname: 'Karimova', color: 2 },
+      { id: 19, name: 'Bobur', surname: 'Rahmonov', color: 3 },
+      { id: 20, name: 'Sevara', surname: 'Alimova', color: 4 },
+      { id: 21, name: 'Murod', surname: 'Usmonboyev', color: 1 },
+      { id: 22, name: 'Ibrohim', surname: 'Karimov', color: 2 },
+      { id: 23, name: 'Javohir', surname: 'Toshmatov', color: 3 },
+      { id: 24, name: 'MuhmmadAzizbek', surname: 'Rahmonov', color: 4 },
+      { id: 25, name: 'Abdulloh', surname: 'Abdurashidov', color: 5 },
+      { id: 26, name: 'Dyorbek', surname: 'Alimov', color: 6 },
+      { id: 27, name: 'FaHriddin', surname: 'Xasanov', color: 7 },
+      { id: 28, name: 'Oybek', surname: 'Yuldashev', color: 8 },
+      { id: 29, name: 'Saidjon', surname: 'Nazarov', color: 1 },
+      { id: 30, name: 'Rasul', surname: 'Salimov', color: 2 },
+      { id: 31, name: 'Abduvahob', surname: 'Olimov', color: 3 },
+      { id: 32, name: 'Saidkomil', surname: 'Valiyev', color: 4 },
+      { id: 33, name: 'Shabnam', surname: 'Ganiyev', color: 5 },
+      { id: 34, name: 'Abdujabor', surname: 'Murodov', color: 6 },
+      { id: 35, name: 'MuhammadYusuf', surname: 'Sobirov', color: 7 },
+      { id: 36, name: 'Husnora', surname: 'Fayziyeva', color: 8 },
+      { id: 37, name: 'Sarvar', surname: 'Toshmatov', color: 1 },
+      { id: 38, name: 'Jasurbek', surname: 'Karimov', color: 2 },
+      { id: 39, name: 'Bobur', surname: 'Abdusamatov', color: 3 },
+      { id: 40, name: 'Dildora', surname: 'Xonova', color: 4 },
+      { id: 41, name: 'Jaloliddin', surname: 'Ganiyev', color: 5},
+
+    ];
+    
+    // Generate user cards
+    const userGrid = document.getElementById('userGrid');
+    
+    users.forEach(user => {
+      const card = document.createElement('div');
+      card.className = 'person-card';
+      card.dataset.id = user.id;
+      card.dataset.name = `${user.name} ${user.surname}`.toLowerCase();
+      card.onclick = () => window.location.href = `profile-main.html?id=${user.id}`;
+      
+      // Use FAMILY NAME (surname) first letter for avatar
+      const initial = user.surname.charAt(0).toUpperCase();
+      card.innerHTML = `
+        <div class="avatar-placeholder color-${user.color}">${initial}</div>
+        <div class="person-name">${user.name}</div>
+        <div class="person-surname">${user.surname}</div>
+      `;
+      userGrid.appendChild(card);
+    });
+    
+    // Search functionality
+    const searchInput = document.getElementById('globalSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const personCards = document.querySelectorAll('.person-card');
+        
+        personCards.forEach(card => {
+          const name = card.textContent.toLowerCase();
+          if (name.includes(searchTerm)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
+

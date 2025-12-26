@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Mahallalar</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Chart.js - FIRST! -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="ideal-mahalla.html" class="nav-item">
+          <i class="fas fa-star"></i>
+          <span>Ideal mahalla</span>
+        </a>
+        <a href="murojaatlar.html" class="nav-item">
+          <i class="fas fa-comments"></i>
+          <span>Murojaatlar</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item active">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <div class="filters">
+          <div class="filter-item">
+            <label>Tuman:</label>
+            <select id="districtFilter">
+              <option value="">Barcha tumanlar</option>
+              <option>Yunusobod tumani</option>
+              <option>Mirzo-Ulug'bek tumani</option>
+              <option>Olmazor tumani</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label>Yil:</label>
+            <select>
+              <option>2024</option>
+              <option>2023</option>
+            </select>
+          </div>
+        </div>
+        
+        <h1 class="page-title">Mahallalar</h1>
+        <p style="margin-bottom: 24px; color: var(--gray-600);">O'zbekiston Respublikasi mahallalari</p>
+        
+        <div class="murojaat-grid" id="mahallalarGrid">
+          <!-- Mahallalar will be generated dynamically -->
+        </div>
+        
+        <div class="pagination">
+          <span class="pagination-info" id="paginationInfo">1-12 of 120</span>
+          <div class="pagination-buttons" id="paginationButtons">
+            <button class="page-btn" id="prevBtn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="page-btn active" data-page="1">1</button>
+            <button class="page-btn" data-page="2">2</button>
+            <button class="page-btn" data-page="3">3</button>
+            <button class="page-btn" data-page="4">4</button>
+            <button class="page-btn" data-page="5">5</button>
+            <button class="page-btn" id="nextBtn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    // Sample mahallalar data (120 total, showing 12 per page)
+    const allMahallalar = [];
+    const mahallaNames = [
+      'Paxtakor', 'Baxor', 'Shirin', 'Navruz', 'Yoshlik', 'Mustaqillik',
+      'Bunyodkor', 'O\'zbekiston', 'Yangi hayot', 'Tinchlik', 'Mehnat', 'Do\'stlik',
+      'Oqoltin', 'Yangiobod', 'Guliston', 'Bog\'iston', 'Yangi yo\'l', 'Yoshlar',
+      'Farovon', 'Sog\'lom', 'Baxt', 'Oq oltin', 'Yangi shahar', 'Markaziy',
+      'Yunusobod', 'Chilonzor', 'Sergeli', 'Olmazor', 'Mirobod', 'Uchtepa','Chuqur','Manaviyat'
+    ];
+    
+    // Generate 120 mahallalar
+    for (let i = 1; i <= 120; i++) {
+      const nameIndex = (i - 1) % mahallaNames.length;
+      const statuses = ['green', 'yellow', 'red'];
+      const status = statuses[Math.floor(Math.random() * statuses.length)];
+      const population = Math.floor(Math.random() * 50000) + 10000;
+      
+      allMahallalar.push({
+        id: i,
+        name: mahallaNames[nameIndex] + ' MFY ' + (Math.floor(i / mahallaNames.length) + 1),
+        population: population,
+        status: status
+      });
+    }
+    
+    // Chart colors
+    const chartColors = {
+      green: '#10B981',
+      yellow: '#FBBF24',
+      red: '#EF4444'
+    };
+    
+    let currentPage = 1;
+    const itemsPerPage = 12;
+    
+    function renderMahallalar(page = 1) {
+      const grid = document.getElementById('mahallalarGrid');
+      grid.innerHTML = '';
+      
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const pageMahallalar = allMahallalar.slice(start, end);
+      
+      pageMahallalar.forEach(mahalla => {
+        const card = document.createElement('div');
+        card.className = `murojaat-card ${mahalla.status}`;
+        card.innerHTML = `
+          <div class="murojaat-card-title">${mahalla.name}</div>
+          <div class="murojaat-card-number">${(mahalla.population / 1000).toFixed(0)}k</div>
+          <div class="murojaat-card-label">nafar</div>
+          <canvas id="mahallaChart${mahalla.id}" class="murojaat-mini-chart"></canvas>
+        `;
+        grid.appendChild(card);
+      });
+      
+      // Update pagination info
+      document.getElementById('paginationInfo').textContent = 
+        `${start + 1}-${Math.min(end, allMahallalar.length)} of ${allMahallalar.length}`;
+      
+      // Initialize charts for current page
+      function initCharts() {
+        if (typeof Chart === 'undefined') {
+          setTimeout(initCharts, 100);
+          return;
+        }
+        
+        pageMahallalar.forEach(mahalla => {
+          const color = chartColors[mahalla.status];
+          createMiniChart('mahallaChart' + mahalla.id, color);
+        });
+      }
+      
+      initCharts();
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      renderMahallalar(1);
+      
+      // Pagination handlers
+      document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const page = parseInt(this.dataset.page);
+          currentPage = page;
+          renderMahallalar(page);
+          
+          // Update active state
+          document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      document.getElementById('nextBtn').addEventListener('click', function() {
+        if (currentPage < Math.ceil(allMahallalar.length / itemsPerPage)) {
+          currentPage++;
+          renderMahallalar(currentPage);
+          
+          // Update active state
+          document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+          document.querySelector(`.page-btn[data-page="${currentPage}"]`)?.classList.add('active');
+        }
+      });
+      
+      document.getElementById('prevBtn').addEventListener('click', function() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderMahallalar(currentPage);
+          
+          // Update active state
+          document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+          document.querySelector(`.page-btn[data-page="${currentPage}"]`)?.classList.add('active');
+        }
+      });
+      
+      // Search functionality
+      const searchInput = document.getElementById('globalSearch');
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const searchTerm = e.target.value.toLowerCase();
+          const cards = document.querySelectorAll('.murojaat-card');
+          
+          cards.forEach(card => {
+            const title = card.querySelector('.murojaat-card-title').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

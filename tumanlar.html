@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Tumanlar</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Chart.js - FIRST! -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="ideal-mahalla.html" class="nav-item">
+          <i class="fas fa-star"></i>
+          <span>Ideal mahalla</span>
+        </a>
+        <a href="murojaatlar.html" class="nav-item">
+          <i class="fas fa-comments"></i>
+          <span>Murojaatlar</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item active">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <div class="filters">
+          <div class="filter-item">
+            <label>Viloyat:</label>
+            <select id="regionFilter">
+              <option value="">Barcha viloyatlar</option>
+              <option>Toshkent viloyati</option>
+              <option>Andijon viloyati</option>
+              <option>Farg'ona viloyati</option>
+              <option>Samarqand viloyati</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label>Yil:</label>
+            <select>
+              <option>2024</option>
+              <option>2023</option>
+            </select>
+          </div>
+        </div>
+        
+        <h1 class="page-title">Tumanlar</h1>
+        <p style="margin-bottom: 24px; color: var(--gray-600);">O'zbekiston Respublikasi tumanlari</p>
+        
+        <div class="murojaat-grid" id="districtsGrid">
+          <!-- Districts will be generated dynamically -->
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    // Initialize authentication and update user menu
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initAuth === 'function') {
+        initAuth();
+      }
+    });
+  </script>
+  <script>
+    // Sample districts data
+    const districts = [
+      { id: 1, name: 'Yunusobod tumani', population: 285000, status: 'green' },
+      { id: 2, name: 'Mirzo-Ulug\'bek tumani', population: 320000, status: 'green' },
+      { id: 3, name: 'Olmazor tumani', population: 185000, status: 'yellow' },
+      { id: 4, name: 'Shayxontohur tumani', population: 360000, status: 'green' },
+      { id: 5, name: 'Uchtepa tumani', population: 130000, status: 'yellow' },
+      { id: 6, name: 'Yakkasaroy tumani', population: 320000, status: 'green' },
+      { id: 7, name: 'Chilonzor tumani', population: 950000, status: 'yellow' },
+      { id: 8, name: 'Sergeli tumani', population: 270000, status: 'green' },
+      { id: 9, name: 'Bektemir tumani', population: 380000, status: 'green' },
+      { id: 10, name: 'Mirobod tumani', population: 85000, status: 'red' },
+      { id: 11, name: 'Sirdaryo tumani', population: 250000, status: 'yellow' },
+      { id: 12, name: 'Xovos tumani', population: 250000, status: 'green' },
+      { id: 13, name: 'Sayhunobod tumani', population: 180000, status: 'yellow' },
+      { id: 14, name: 'Guliston tumani', population: 190000, status: 'red' },
+      { id: 15, name: 'Mirzaobod tumani', population: 220000, status: 'green' },
+      { id: 16, name: 'Oqoltin tumani', population: 150000, status: 'yellow' },
+      { id: 17, name: 'Sardoba tumani', population: 175000, status: 'yellow' },
+      { id: 18, name: 'Yangiobod tumani', population: 210000, status: 'green' },
+      { id: 19, name: 'Paxtaobod tumani', population: 195000, status: 'green' },
+      { id: 20, name: 'Boyovut tumani', population: 165000, status: 'red' },
+      { id: 21, name: 'Guliston shahri', population: 280000, status: 'green' },
+      { id: 22, name: 'Shirin shahri', population: 240000, status: 'yellow' },
+      { id: 23, name: 'Yangiyer shahri', population: 200000, status: 'green' },
+      { id: 24, name: 'Bekobod tumani', population: 310000, status: 'green' },
+      { id: 25, name: 'Chinoz tumani', population: 180000, status: 'yellow' },
+      { id: 26, name: 'Parkent tumani', population: 145000, status: 'red' },
+      { id: 27, name: 'Piskent tumani', population: 195000, status: 'green' },
+      { id: 28, name: 'Qibray tumani', population: 225000, status: 'yellow' },
+      { id: 29, name: 'Oltiariq tumani', population: 245000, status: 'yellow' },
+      { id: 30, name: 'Qiziltepa tumani', population: 215000, status: 'green' },
+      { id: 31, name: 'Qo\'qon tumani', population: 245000, status: 'yellow' },
+    ];
+    
+    // Chart colors
+    const chartColors = {
+      green: '#10B981',
+      yellow: '#FBBF24',
+      red: '#EF4444'
+    };
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const grid = document.getElementById('districtsGrid');
+      
+      // Generate district cards
+      districts.forEach((district, index) => {
+        const card = document.createElement('div');
+        card.className = `murojaat-card ${district.status}`;
+        card.innerHTML = `
+          <div class="murojaat-card-title">${district.name}</div>
+          <div class="murojaat-card-number">${(district.population / 1000).toFixed(0)}k</div>
+          <div class="murojaat-card-label">nafar</div>
+          <canvas id="districtChart${district.id}" class="murojaat-mini-chart"></canvas>
+        `;
+        grid.appendChild(card);
+      });
+      
+      // Initialize charts
+      function initCharts() {
+        if (typeof Chart === 'undefined') {
+          setTimeout(initCharts, 100);
+          return;
+        }
+        
+        districts.forEach(district => {
+          const color = chartColors[district.status];
+          createMiniChart('districtChart' + district.id, color);
+        });
+      }
+      
+      initCharts();
+      
+      // Search functionality
+      const searchInput = document.getElementById('globalSearch');
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const searchTerm = e.target.value.toLowerCase();
+          const cards = grid.querySelectorAll('.murojaat-card');
+          
+          cards.forEach(card => {
+            const title = card.querySelector('.murojaat-card-title').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

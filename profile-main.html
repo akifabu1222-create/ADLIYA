@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Profil</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <h1 class="profile-name" id="profileName"></h1>
+        
+        <div class="profile-tabs">
+          <button class="profile-tab active" data-tab="personal" id="tabPersonal">Fuqoro haqida</button>
+          <button class="profile-tab" data-tab="family" id="tabFamily">Fuqoroning oilaviy ahvoli</button>
+          <button class="profile-tab" data-tab="relatives" id="tabRelatives">Fuqoroning yaqinlari haqida ma'lumotlar</button>
+        </div>
+        
+        <div class="profile-content">
+          <div class="profile-section">
+            <h3>Fuqoroning shaxsiy ma'lumotlari</h3>
+            
+            <div class="profile-info-layout">
+              <div class="avatar-placeholder large" id="profileAvatar">S</div>
+              
+              <div class="profile-info-list">
+                <div class="info-row">
+                  <span class="info-label">Fuqoroning familiyasi:</span>
+                  <span class="info-value" id="profileSurname"></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Fuqoroning ismi:</span>
+                  <span class="info-value" id="profileNameValue"></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Otasining ismi:</span>
+                  <span class="info-value" id="profilePatronymic"></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Pasport seriyasi:</span>
+                  <span class="info-value" id="profilePassport"></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">JSHSHIR:</span>
+                  <span class="info-value" id="profileJshshir"></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Telefon raqami:</span>
+                  <span class="info-value" id="profilePhone"></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Tug'ilgan sanasi:</span>
+                  <span class="info-value" id="profileBirthdate"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="profile-section">
+            <h3>Fuqoro haqida qisqacha ma'lumotlar</h3>
+            <div id="profileAbout">
+              <!-- About text will be populated dynamically -->
+            </div>
+          </div>
+          
+          <div class="profile-section">
+            <h3>Yashash manzili</h3>
+            <div class="map-container" id="map"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script src="js/auth.js"></script>
+  <script src="js/profile-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/tabs.js"></script>
+  <script src="js/map.js"></script>
+  <script>
+    // Initialize authentication and update user menu
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initAuth === 'function') {
+        initAuth();
+      }
+    });
+  </script>
+  <script>
+    // Load profile data based on URL parameter - CRITICAL: Persist user ID across tabs
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = parseInt(urlParams.get('id')) || 5;
+    const userData = getUserData(userId);
+    
+    // Store userId globally to ensure persistence
+    window.currentUserId = userId;
+    
+    // Tab navigation - preserve user ID
+    document.getElementById('tabFamily').onclick = function() {
+      window.location.href = `profile-family.html?id=${userId}`;
+    };
+    document.getElementById('tabRelatives').onclick = function() {
+      window.location.href = `profile-relatives.html?id=${userId}`;
+    };
+    
+    // Update profile page with user data - ALL fields dynamic
+    document.getElementById('profileName').textContent = `${userData.surname} ${userData.name}`;
+    document.getElementById('profileSurname').textContent = userData.surname;
+    document.getElementById('profileNameValue').textContent = userData.name;
+    document.getElementById('profilePatronymic').textContent = userData.patronymic;
+    document.getElementById('profilePassport').textContent = userData.passport;
+    document.getElementById('profileJshshir').textContent = userData.jshshir;
+    document.getElementById('profilePhone').textContent = userData.phone;
+    document.getElementById('profileBirthdate').textContent = userData.birthdate; // Dynamic birthdate per user
+    
+    // Update about section - remove Lorem ipsum, use actual data
+    const aboutContainer = document.getElementById('profileAbout');
+    if (userData.about && userData.about.trim() && !userData.about.toLowerCase().includes('lorem')) {
+      const paragraphs = userData.about.split('. ').filter(p => p.trim().length > 0);
+      paragraphs.forEach(paragraph => {
+        const p = document.createElement('p');
+        p.className = 'profile-text';
+        p.textContent = paragraph.trim() + (paragraph.trim().endsWith('.') ? '' : '.');
+        aboutContainer.appendChild(p);
+      });
+    } else {
+      // Generate meaningful about text from user data
+      const p = document.createElement('p');
+      p.className = 'profile-text';
+      p.textContent = `${userData.surname} ${userData.name} ${userData.patronymic}, ${userData.birthdate} yilda tug'ilgan. Pasport seriyasi: ${userData.passport}, JSHSHIR: ${userData.jshshir}. Yashash manzili: ${userData.address}.`;
+      aboutContainer.appendChild(p);
+    }
+    
+    // Update avatar - use FAMILY NAME (surname) first letter
+    const avatar = document.getElementById('profileAvatar');
+    avatar.textContent = userData.surname.charAt(0).toUpperCase();
+    avatar.className = `avatar-placeholder large color-${userData.color}`;
+    
+    // Initialize map with user's location - CRITICAL: Prevents reset bug
+    // Wait for Leaflet to load, then initialize map with user data
+    function waitForLeaflet(callback) {
+      if (typeof L !== 'undefined') {
+        callback();
+      } else {
+        setTimeout(() => waitForLeaflet(callback), 100);
+      }
+    }
+    
+    waitForLeaflet(function() {
+      initMap(userData);
+    });
+  </script>
+</body>
+</html>
+

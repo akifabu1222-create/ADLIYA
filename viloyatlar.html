@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - Viloyatlar</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Chart.js - FIRST! -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/avatars.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+        <h3>O'zbekiston Respublikasi<br>Adliya vazirligi</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="ideal-mahalla.html" class="nav-item">
+          <i class="fas fa-star"></i>
+          <span>Ideal mahalla</span>
+        </a>
+        <a href="murojaatlar.html" class="nav-item">
+          <i class="fas fa-comments"></i>
+          <span>Murojaatlar</span>
+        </a>
+        <a href="viloyatlar.html" class="nav-item active">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Viloyatlar</span>
+        </a>
+        <a href="tumanlar.html" class="nav-item">
+          <i class="fas fa-city"></i>
+          <span>Tumanlar</span>
+        </a>
+        <a href="mahallalar.html" class="nav-item">
+          <i class="fas fa-home"></i>
+          <span>Mahallalar</span>
+        </a>
+        <a href="fuqorolar.html" class="nav-item">
+          <i class="fas fa-users"></i>
+          <span>Fuqorolar</span>
+        </a>
+        <a href="xodimlar.html" class="nav-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Xodimlar</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Chiqish</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Header -->
+      <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Qidiruv..." id="globalSearch">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar-placeholder" id="userAvatar">U</div>
+            <span id="userName">Foydalanuvchi</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <main class="content">
+        <div class="filters">
+          <div class="filter-item">
+            <label>Yil:</label>
+            <select>
+              <option>2024</option>
+              <option>2023</option>
+            </select>
+          </div>
+        </div>
+        
+        <h1 class="page-title">Viloyatlar</h1>
+        <p style="margin-bottom: 24px; color: var(--gray-600);">O'zbekiston Respublikasi viloyatlari</p>
+        
+        <div class="murojaat-grid" id="regionsGrid">
+          <!-- Regions will be generated dynamically -->
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    // Initialize authentication and update user menu
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initAuth === 'function') {
+        initAuth();
+      }
+    });
+  </script>
+  <script>
+    // Uzbekistan regions data
+    const regions = [
+      { id: 1, name: 'Toshkent viloyati', population: 2850000, status: 'green' },
+      { id: 2, name: 'Andijon viloyati', population: 3200000, status: 'green' },
+      { id: 3, name: 'Buxoro viloyati', population: 1850000, status: 'yellow' },
+      { id: 4, name: 'Farg\'ona viloyati', population: 3600000, status: 'green' },
+      { id: 5, name: 'Jizzax viloyati', population: 1300000, status: 'yellow' },
+      { id: 6, name: 'Qashqadaryo viloyati', population: 3200000, status: 'green' },
+      { id: 7, name: 'Navoiy viloyati', population: 950000, status: 'yellow' },
+      { id: 8, name: 'Namangan viloyati', population: 2700000, status: 'green' },
+      { id: 9, name: 'Samarqand viloyati', population: 3800000, status: 'green' },
+      { id: 10, name: 'Sirdaryo viloyati', population: 850000, status: 'red' },
+      { id: 11, name: 'Surxondaryo viloyati', population: 2500000, status: 'yellow' },
+      { id: 12, name: 'Toshkent shahri', population: 2500000, status: 'green' },
+      { id: 13, name: 'Xorazm viloyati', population: 1800000, status: 'yellow' },
+      { id: 14, name: 'Qoraqalpog\'iston Respublikasi', population: 1900000, status: 'red' }
+    ];
+    
+    // Chart colors
+    const chartColors = {
+      green: '#10B981',
+      yellow: '#FBBF24',
+      red: '#EF4444'
+    };
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const grid = document.getElementById('regionsGrid');
+      
+      // Generate region cards
+      regions.forEach((region, index) => {
+        const card = document.createElement('div');
+        card.className = `murojaat-card ${region.status}`;
+        card.innerHTML = `
+          <div class="murojaat-card-title">${region.name}</div>
+          <div class="murojaat-card-number">${(region.population / 1000).toFixed(0)}k</div>
+          <div class="murojaat-card-label">nafar</div>
+          <canvas id="regionChart${region.id}" class="murojaat-mini-chart"></canvas>
+        `;
+        grid.appendChild(card);
+      });
+      
+      // Initialize charts
+      function initCharts() {
+        if (typeof Chart === 'undefined') {
+          setTimeout(initCharts, 100);
+          return;
+        }
+        
+        regions.forEach(region => {
+          const color = chartColors[region.status];
+          createMiniChart('regionChart' + region.id, color);
+        });
+      }
+      
+      initCharts();
+      
+      // Search functionality
+      const searchInput = document.getElementById('globalSearch');
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const searchTerm = e.target.value.toLowerCase();
+          const cards = document.querySelectorAll('.murojaat-card');
+          
+          cards.forEach(card => {
+            const title = card.querySelector('.murojaat-card-title').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

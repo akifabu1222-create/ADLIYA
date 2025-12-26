@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADLIYA - SMS Tasdiqlash</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  
+  <div class="sms-container">
+    <!-- Left Side -->
+    <div class="sms-left">
+      <img src="img/icon.png" alt="O'zbekiston gerbi" class="gerb">
+      <h1>O'zbekiston Respublikasi</h1>
+      <h2>Adliya vazirligi</h2>
+      
+      <div class="sms-progress">
+        <div class="progress-item active">
+          SMS tasdiqlash
+        </div>
+        <div class="progress-item">
+          Parolni yangilash
+        </div>
+        <div class="progress-item">
+          Muvaffaqiyatli bajarildi
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Side -->
+    <div class="sms-right">
+      <form class="sms-form" id="smsForm">
+        <h2>SMS kodni tasdiqlash</h2>
+        
+        <div class="phone-input-group">
+          <label class="input-label">Telefon raqami</label>
+          <div>
+            <span class="phone-prefix">+998</span>
+            <input type="tel" class="phone-input" placeholder="90 129 98 91" required>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">SMS kodni kiriting</label>
+          <div class="sms-inputs">
+            <input type="text" class="sms-input" maxlength="1" pattern="[0-9]" required>
+            <input type="text" class="sms-input" maxlength="1" pattern="[0-9]" required>
+            <input type="text" class="sms-input" maxlength="1" pattern="[0-9]" required>
+            <input type="text" class="sms-input" maxlength="1" pattern="[0-9]" required>
+            <input type="text" class="sms-input" maxlength="1" pattern="[0-9]" required>
+            <input type="text" class="sms-input" maxlength="1" pattern="[0-9]" required>
+          </div>
+        </div>
+        
+        <div class="sms-info">
+          <p>+998-90-129-98-91 raqamiga SMS kod yuborildi</p>
+        </div>
+        
+        <div class="timer" id="timer">01:25</div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          Keyingisi
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="js/sms-verification.js"></script>
+</body>
+</html>
+
